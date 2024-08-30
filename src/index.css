@@ -17,6 +17,36 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+/* Define custom scrollbar variables */
+body {
+  --sb-track-color: #232E33;
+  --sb-thumb-color: #fc8a5d;
+  --sb-size: 5px;
+}
+
+/* Apply scrollbar styles to all scrollable elements */
+*::-webkit-scrollbar {
+  width: var(--sb-size);
+  height: var(--sb-size);
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 3px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 3px;
+}
+
+/* Fallback for browsers not supporting ::-webkit-scrollbar */
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    scrollbar-width: thin; /* For Firefox */
+  }
+}
 
 a {
   font-weight: 500;
@@ -29,10 +59,9 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+ 
+  
+
 }
 
 h1 {
