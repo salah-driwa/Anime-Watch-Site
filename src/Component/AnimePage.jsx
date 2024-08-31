@@ -161,7 +161,8 @@ const EpisodeList = ({ episodes }) => (
         </div>
         {episode.isActive && (
           <div className="ml-auto text-red-500">
-            <span>🔴</span>
+            <span><CiStreamOn />
+            </span>
           </div>
         )}
       </div>
