@@ -16,7 +16,7 @@ const VideoPlayer = ({ image, title, live, viewers, duration ,currentTime}) => (
   <div className=' flex flex-col '>
   <div className="relative rounded-2xl ">
     <img src={image} alt={title} className="w-full    object-cover rounded-lg" />
-    <div className="absolute top-4  right-24 bg-gray-500  text-white  px-2 py-1 text-sm flex  items-center gap-2"><FaUsers /> {viewers}
+    <div className="absolute top-4  right-24 bg-gray-500 rounded-full  text-white  px-2 py-1 text-sm flex  items-center gap-2"><FaUsers /> {viewers}
     </div>
     {live && <div className="absolute top-4 right-4 bg-red-500 text-white rounded-full px-2 py-1 text-sm flex   gap-2 items-center "> <CiStreamOn />
       Live</div>}
@@ -148,7 +148,7 @@ const EpisodeList = ({ episodes }) => (
     {episodes.map((episode) => (
       <div 
         key={episode.id} 
-        className={`flex space-x-4 items-center p-2 rounded ${episode.isActive ? 'bg-gray-700' : ''}`}
+        className={`flex space-x-4 items-center w-f p-2 rounded ${episode.isActive ? 'bg-gray-700' : ''}`}
       >
         <img 
           src={episode.image} 
@@ -160,9 +160,9 @@ const EpisodeList = ({ episodes }) => (
           <p className="text-sm text-gray-400">{episode.date}</p>
         </div>
         {episode.isActive && (
-          <div className="ml-auto text-red-500">
+          <div className="ml-auto flex   text-red-500">
             <span><CiStreamOn />
-            </span>
+</span>
           </div>
         )}
       </div>
