@@ -6,7 +6,7 @@ const App = () => {
   const routing = useRoutes(routes);
 
   return (
-    <div>
+    <div className=' '>
       <Suspense fallback={<div>Loading...</div>}>
         {routing}
       </Suspense>

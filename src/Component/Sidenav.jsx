@@ -3,7 +3,8 @@ import { BsCollectionFill, BsDot } from 'react-icons/bs';
 import { FaHome, FaFire, FaCalendar, FaListAlt, FaHistory, FaSave, FaCog, FaSignOutAlt, FaCloudDownloadAlt, FaBroadcastTower, FaAngleDown } from 'react-icons/fa';
 import { RiAccountCircleFill } from 'react-icons/ri';
 
-const Sidebar = () => {
+// eslint-disable-next-line react/prop-types
+const Sidebar = ({toggle}) => {
   const [selected, setSelected] = useState('Home'); // Default to 'Home'
 
   const menuItems = [
@@ -41,7 +42,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="bg-bg w-64 flex flex-col justify-between p-4">
+    <div className="bg-bg w-64  min-w-64 flex flex-col justify-between p-4">
         <div className='flex flex-col  '>
       <div>
         <ul className="">
@@ -53,7 +54,10 @@ const Sidebar = () => {
                   ? 'text-primary border-r-2  border-primary '
                   : 'text-gray-400 hover:text-white'
               }`}
-              onClick={() => handleClick(item.name)}
+              onClick={() => {
+                toggle(); 
+handleClick(item.name);
+              }}
             >
               <span className="mr-2">{item.icon}</span> {item.name}
             </li>
@@ -66,12 +70,16 @@ const Sidebar = () => {
           {menuItems.slice(4, 8).map((item) => (
             <li
               key={item.name}
+        
               className={`cursor-pointer flex items-center p-2  ${
                 selected === item.name
                   ? 'text-primary border-r-2  border-primary '
                   : 'text-gray-400 hover:text-white'
               }`}
-              onClick={() => handleClick(item.name)}
+              onClick={() => {
+                toggle(); 
+handleClick(item.name);
+              }}
             >
               <span className="mr-2">{item.icon}</span> {item.name}
             </li>

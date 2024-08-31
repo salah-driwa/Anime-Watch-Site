@@ -2,7 +2,8 @@ import  { useState } from 'react';
 import { CiStreamOn } from 'react-icons/ci';
 import { FaUsers } from 'react-icons/fa';
 
-const HeroSection = () => {
+// eslint-disable-next-line react/prop-types
+const HeroSection = ({toggle}) => {
   const slides = [
     {
       title: 'Bleach: Thousand Year Blood War',
@@ -31,8 +32,9 @@ const HeroSection = () => {
   };
 
   return (
+    <div className='p-5 w-full '>
     <div
-      className="relative bg-cover bg-center  h-96 m-5 rounded-2xl   "
+      className="relative bg-cover bg-center  w-full  h-72 rounded-2xl   "
       style={{ backgroundImage: `url(${slides[currentSlide].bgImage})` }}
       
     >
@@ -51,7 +53,7 @@ const HeroSection = () => {
         <h1 className="text-white text-4xl font-bold">{slides[currentSlide].title}</h1>
         <p className="text-gray-200 text-lg text-opacity-80">{slides[currentSlide].subtitle}</p>
         </div>
-        <button className=" bg-primary text-white px-4 py-2 mt-4  rounded-full">Watch Now</button>
+        <button  onClick={toggle} className=" bg-primary text-white px-4 py-2 mt-4  rounded-full">Watch Now</button>
      
       </div>
       
@@ -71,6 +73,7 @@ const HeroSection = () => {
           />
         ))}
       </div>
+    </div>
     </div>
   );
 };

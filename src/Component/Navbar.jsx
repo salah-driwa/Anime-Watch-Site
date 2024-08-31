@@ -3,13 +3,14 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { IoTime } from 'react-icons/io5';
 import { MdNightlightRound } from 'react-icons/md';
 
-const Navbar = () => {
+// eslint-disable-next-line react/prop-types
+const Navbar = ({toggle}) => {
   return (
     <nav className="bg-bg border-b mt-2 border-white border-opacity-20  h-fit  p-4 flex justify-between items-center">
         <div className=' flex items-center gap-3'>
         <GiHamburgerMenu size={35} className=' hover:text-primary cursor-pointer p-1' />
 
-      <div className="text-white text-xl font-bold"><span className=' text-primary'>W A</span>nime</div>
+      <div className="text-white text-xl  font-bold cursor-pointer" onClick={()=>toggle()}><span className=' text-primary'>W A</span>nime</div>
       </div>
       <div className=' flex items-center gap-3'>
       <div className= " flex items-center bg-[#323847]  border-opacity-15 border-white  pr-1 border rounded-full ">
