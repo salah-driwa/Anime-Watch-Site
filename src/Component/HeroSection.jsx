@@ -38,7 +38,7 @@ const HeroSection = ({toggle}) => {
       style={{ backgroundImage: `url(${slides[currentSlide].bgImage})` }}
       
     >
-        <div className=' flex w-full  z-20  items-center gap-3 mt-3  pr-5  justify-end rounded-b-2xl '> 
+        <div className=' flex w-full  z-20  items-center gap-3  pt-3  pr-5  justify-end rounded-b-2xl  '> 
             <div className=' rounded-full text-white opacity-100  bg-black bg-opacity-80 p-2  flex items-center gap-2 px-4 border border-white border-opacity-15 '><FaUsers />{slides[currentSlide].viewer} 
             </div>
             <div className=' rounded-full text-white opacity-100  bg-red-600  bg-opacity-100 p-2  flex items-center gap-2 px-4 border border-white border-opacity-15 '>
