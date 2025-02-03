@@ -1,5 +1,9 @@
-// eslint-disable-next-line react/prop-types
-const ContinueWatching = ({toggle}) => {
+/* eslint-disable react/prop-types */
+import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+
+const ContinueWatching = ({ toggle }) => {
+  const [isLoading, setIsLoading] = useState(true); // State for loading
   const shows = [
     { id: 1, title: "Mushoku Tensei: Jobless Reincarnation", image: "https://resizing.flixster.com/wQwq3e6kGta1ZRHld82YOpNK_fA=/375x210/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p19354923_i_h10_aa.jpg", episode: "EP 23", time: "16:32", updated: true, progress: 70 },
     { id: 2, title: "Bleach: Thousand Year Blood War", image: "https://platform.polygon.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/24090589/BLS01_135_t6_1200x630.jpg?quality=90&strip=all&crop=0,0.13712291199202,100,99.725754176016", episode: "EP 16", time: "12:00", updated: false, progress: 45 },
@@ -11,36 +15,63 @@ const ContinueWatching = ({toggle}) => {
     { id: 8, title: "Tokyo Revengers S2", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7fxYsqHLF4x5OiyUquqbQti2IBg0h4td0Pg&s", episode: "EP 15", time: "13:20", updated: false, progress: 50 },
     { id: 9, title: "To Your Eternity", image: "https://m.media-amazon.com/images/S/pv-target-images/51cb33cb9ffb37bc2e15d7c532a318a045bb63ea52ae10c64c0053102bd671b0._SX1080_FMjpg_.jpg", episode: "EP 20", time: "14:50", updated: true, progress: 75 },
     { id: 10, title: "Dr. Stone S3", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY1LezKDywgvQgswyXbGS3x7lctsfq1iqPCA&s", episode: "EP 11", time: "09:10", updated: false, progress: 40 },
-];
+  ];
+
+  // Simulate loading
+  useEffect(() => {
+    setTimeout(() => setIsLoading(false), 1000); // Simulate loading for 1 second
+  }, []);
 
   return (
-    <div className="p-4    w-full">
-      
+    <div className="p-4 w-full">
       <h2 className="text-white text-2xl mb-4">Continue Watching</h2>
       <div className="flex gap-4 overflow-x-scroll">
-        {shows.map(show => (
-          <div key={show.id} onClick={()=>toggle()}  className="relative hover:bg-opacity-10 hover:bg-gray-500 rounded-lg p-2 min-w-60 w-60">
-            <div className="relative w-full">
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent rounded-lg"></div>
+        {isLoading ? (
+          // Skeleton loader for loading state
+          Array(shows.length) // Dynamic number of skeletons based on shows array
+            .fill(0)
+            .map((_, index) => (
+              <div
+              key={index}
+                className="w-60 min-w-60 h-48 bg-gray-700 rounded-lg animate-pulse"
+               
+              ></div>
+            ))
+        ) : (
+          // Show actual content
+          shows.map((show, index) => (
+            <motion.div
+              key={index}
+              className="relative hover:bg-opacity-10 hover:bg-gray-500 rounded-lg p-2 min-w-60 w-60"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: index * 0.2 }}
               
-              <img src={show.image} alt={show.title} className="w-full h-32 object-cover rounded-lg" />
-              
-              {/* Centered progress bar */}
-              <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-11/12 h-0.5 bg-gray-700 rounded-full">
-                <div className="h-full bg-primary rounded-full" style={{ width: `${show.progress}%` }}></div>
+              onClick={() => toggle()}
+     
+            >
+              <div className="relative w-full">
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent rounded-lg"></div>
+
+                <img src={show.image} alt={show.title} className="w-full h-32 object-cover rounded-lg" />
+
+                {/* Centered progress bar */}
+                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-11/12 h-0.5 bg-gray-700 rounded-full">
+                  <div className="h-full bg-primary rounded-full" style={{ width: `${show.progress}%` }}></div>
+                </div>
+
+                {show.updated && (
+                  <span className="absolute top-2 right-1 bg-yellow-500 text-white text-xs px-2 py-1 rounded-full">
+                    Updated
+                  </span>
+                )}
               </div>
-              
-              {show.updated && (
-                <span className="absolute top-2 right-1 bg-yellow-500 text-white text-xs px-2 py-1 rounded-full">
-                  Updated
-                </span>
-              )}
-            </div>
-            <h3 className="text-white mt-2">{show.title}</h3>
-            <p className="text-gray-400 text-sm">Watch until {show.episode}, {show.time}</p>
-          </div>
-        ))}
+              <h3 className="text-white mt-2">{show.title}</h3>
+              <p className="text-gray-400 text-sm">Watch until {show.episode}, {show.time}</p>
+            </motion.div>
+          ))
+        )}
       </div>
     </div>
   );
